@@ -2,7 +2,7 @@ WITH raw_listings AS (
     SELECT 
         *
     FROM 
-        airbnb.raw.raw_listings
+       {{ source('airbnb', 'listings') }}
 )
 SELECT
     id as listing_id,
