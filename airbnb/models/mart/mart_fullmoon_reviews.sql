@@ -21,5 +21,5 @@ SELECT
         ELSE 'full moon'
     END AS is_full_moon
 FROM fct_reviews AS r
-JOIN fullmoon_dates AS fm
+LEFT JOIN fullmoon_dates AS fm
     ON (TO_DATE(r.review_date) = DATEADD(DAY, 1, fm.full_moon_date))
