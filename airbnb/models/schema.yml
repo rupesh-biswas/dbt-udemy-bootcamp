@@ -17,3 +17,45 @@ models:
         data_tests:
           - accepted_values:
               values: ['Entire home/apt', 'Private room', 'Shared room', 'Hotel room']
+
+  - name: dim_hosts_cleansed
+    columns:
+      - name: host_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: host_name
+        data_tests:
+          - not_null
+      
+      - name: is_superhost
+        data_tests:
+          - accepted_values:
+              values: ['t', 'f']
+
+  - name: fct_reviews
+    columns:
+      - name: reviewer_name
+        data_tests:
+          - not_null
+      
+      - name: review_text
+        data_tests:
+          - not_null
+
+      - name: review_date
+        data_tests:
+          - not_null
+      
+      - name: listing_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_listings_cleansed')
+              field: listing_id
+      
+      - name: review_sentiment
+        data_tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'neutral']
